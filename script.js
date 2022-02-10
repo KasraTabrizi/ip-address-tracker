@@ -1,9 +1,14 @@
-const ipAPI =
-  "https://geo.ipify.org/api/v2/country,city?apiKey=at_sk0QeXSyRd5htfsgJj8NxwHuHijia&ipAddress=213.118.163.190";
-
+//Global variables
+let ipAPI = "";
 let latValue = 0;
 let lngValue = 0;
+let map;
 
+//Define regular expression for checking on IP addresses and domain names.
+const ipAddressRegex = new RegExp(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/);
+const domainNameRegex = new RegExp(/([a-z0-9]+\.)*[a-z0-9]+\.[a-z]+/);
+
+//get Elements
 const ipAddress = document.getElementById("ip_address");
 const ipLocation = document.getElementById("ip_location");
 const timeZone = document.getElementById("time_zone");
@@ -11,13 +16,23 @@ const isp = document.getElementById("isp");
 const input = document.getElementById("ip_input");
 const searchButton = document.getElementById("search_button");
 
+//Default state
+
 searchButton.addEventListener("click", () => {
-  fetch(
-    `https://geo.ipify.org/api/v2/country,city?apiKey=at_sk0QeXSyRd5htfsgJj8NxwHuHijia&ipAddress=${input.value}`
-  )
+  console.log(ipAddressRegex.test(input.value));
+  console.log(domainNameRegex.test(input.value));
+
+  if (ipAddressRegex.test(input.value)) {
+    ipAPI = `https://geo.ipify.org/api/v2/country,city?apiKey=at_sk0QeXSyRd5htfsgJj8NxwHuHijia&ipAddress=${input.value}`;
+  } else if (domainNameRegex.test(input.value)) {
+    ipAPI = `https://geo.ipify.org/api/v2/country,city?apiKey=at_sk0QeXSyRd5htfsgJj8NxwHuHijia&domain=${input.value}`;
+  } else {
+    //error
+  }
+
+  fetch(ipAPI)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       ipAddress.textContent = data.ip;
       ipLocation.textContent = `${data.location.city}, ${data.location.country} ${data.location.postalCode}`;
       timeZone.textContent = "UTC " + data.location.timezone;
@@ -25,7 +40,11 @@ searchButton.addEventListener("click", () => {
       latValue = data.location.lat;
       lngValue = data.location.lng;
 
-      let map = L.map("map", { zoomControl: false }).setView(
+      if (map != undefined) {
+        map.remove();
+      }
+
+      map = L.map("map", { zoomControl: false }).setView(
         [latValue, lngValue],
         15
       );
