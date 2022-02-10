@@ -16,11 +16,14 @@ const timeZone = document.getElementById("time_zone");
 const isp = document.getElementById("isp");
 const input = document.getElementById("ip_input");
 const searchButton = document.getElementById("search_button");
+const additionalInfoContainer = document.getElementsByClassName(
+  "additional__information "
+)[0];
 
 //Default state
-//show map of the world
 //hide additional information
 window.onload = () => {
+  //show map of the world
   showMap(latValue, lngValue, zoomLevel);
 };
 
@@ -30,7 +33,8 @@ searchButton.addEventListener("click", () => {
   } else if (domainNameRegex.test(input.value)) {
     ipAPI = `https://geo.ipify.org/api/v2/country,city?apiKey=at_sk0QeXSyRd5htfsgJj8NxwHuHijia&domain=${input.value}`;
   } else {
-    //error
+    input.value = "Invalid input. Please try again.";
+    input.style.color = "red";
   }
 
   fetch(ipAPI)
@@ -43,7 +47,10 @@ searchButton.addEventListener("click", () => {
       latValue = data.location.lat;
       lngValue = data.location.lng;
       zoomLevel = 15;
+      additionalInfoContainer.classList.add("additional__information");
+      additionalInfoContainer.classList.add("active");
 
+      //remove old layer to update map with new coordinates
       if (map != undefined) {
         map.remove();
       }
