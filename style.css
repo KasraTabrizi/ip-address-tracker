@@ -1,7 +1,126 @@
-.attribution {
-  font-size: 11px;
-  text-align: center;
+:root {
+  --color-very-dark-gray: hsl(0, 0%, 17%);
+  --color-dark-gray: hsl(0, 0%, 59%);
+  --font-weight-400: 400;
+  --font-weight-500: 500;
+  --font-weight-700: 700;
 }
-.attribution a {
-  color: hsl(228, 45%, 44%);
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  font-family: "Rubik", sans-serif;
+}
+
+#info__container {
+  position: absolute;
+  z-index: 1000;
+  width: 85vw;
+  left: 0;
+  right: 0;
+  margin: 25px auto;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  font-weight: var(--font-weight-500);
+}
+
+#search__container {
+  margin: 25px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#ip_input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background-color: white;
+  height: 60px;
+  border-radius: 15px 0 0 15px;
+  font-family: "Rubik", sans-serif;
+  font-size: 1.2em;
+  padding-left: 20px;
+}
+
+::-webkit-input-placeholder {
+  font-size: 0.8em;
+}
+
+#search_button {
+  border: none;
+  outline: none;
+  background-color: var(--color-very-dark-gray);
+  height: 60px;
+  width: 80px;
+  border-radius: 0 15px 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.additional__information {
+  background-color: white;
+  border-radius: 15px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.block {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.block h3 {
+  color: var(--color-dark-gray);
+  font-size: 0.7em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.api_value {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  font-weight: var(--font-weight-500);
+}
+
+/* mobile */
+.top_image img {
+  display: block;
+  margin: 0px 0px 0px -550px;
+}
+
+/* From tablet to desktop onwards */
+@media (min-width: 768px) {
+  .top_image img {
+    display: block;
+    width: 100vw;
+    min-height: 250px;
+    margin: 0;
+  }
+}
+
+#map {
+  height: 70vh;
+  width: 100vw;
 }
