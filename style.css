@@ -1,5 +1,6 @@
 :root {
   --color-very-dark-gray: hsl(0, 0%, 17%);
+  --color-hover: hsl(0, 1%, 33%);
   --color-dark-gray: hsl(0, 0%, 59%);
   --font-weight-400: 400;
   --font-weight-500: 500;
@@ -37,7 +38,7 @@ h1 {
 }
 
 #search__container {
-  margin: 25px 0;
+  margin: 25px auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,6 +71,11 @@ h1 {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: 0.1s all ease-in-out;
+}
+
+#search_button:active {
+  background-color: var(--color-hover);
 }
 
 .additional__information {
@@ -117,6 +123,52 @@ h1 {
     width: 100vw;
     min-height: 250px;
     margin: 0;
+  }
+
+  #search__container {
+    width: 45%;
+  }
+
+  .additional__information {
+    width: 90%;
+    margin: 0 auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding: 30px 0;
+    margin-top: 45px;
+  }
+
+  .block {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 20px;
+  }
+
+  .separate_line {
+    height: 50px;
+    width: 2px;
+    background-color: var(--color-dark-gray);
+    opacity: 0.4;
+  }
+
+  .block h3 {
+    color: var(--color-dark-gray);
+    font-size: 0.7em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .api_value {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    font-weight: var(--font-weight-500);
   }
 }
 
