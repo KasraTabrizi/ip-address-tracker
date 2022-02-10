@@ -16,7 +16,7 @@ const timeZone = document.getElementById("time_zone");
 const isp = document.getElementById("isp");
 const input = document.getElementById("ip_input");
 const searchButton = document.getElementById("search_button");
-const additionalInfoContainer = document.getElementsByClassName(
+const addInfoContainer = document.getElementsByClassName(
   "additional__information "
 )[0];
 
@@ -47,8 +47,8 @@ searchButton.addEventListener("click", () => {
       latValue = data.location.lat;
       lngValue = data.location.lng;
       zoomLevel = 15;
-      additionalInfoContainer.classList.add("additional__information");
-      additionalInfoContainer.classList.add("active");
+      addInfoContainer.classList.add("additional__information");
+      addInfoContainer.classList.add("active");
 
       //remove old layer to update map with new coordinates
       if (map != undefined) {
